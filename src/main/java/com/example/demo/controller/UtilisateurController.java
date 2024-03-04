@@ -58,14 +58,15 @@ public class UtilisateurController {
 	
 	
 	
-	@PutMapping("user/update_user/{id}/{nom}/{prenom}")
-	public ResponseEntity<Utilisateur> updateUser(@PathVariable Long id, @PathVariable String nom, @PathVariable String prenom) {
+	@PutMapping("user/update_user/{id}/{nom}/{prenom}/{username}")
+	public ResponseEntity<Utilisateur> updateUser(@PathVariable Long id, @PathVariable String nom, @PathVariable String prenom,@PathVariable String username) {
 	    Optional<Utilisateur> utilisateurOptional = utilisateurRepository.findById(id);
 
 	    if (utilisateurOptional.isPresent()) {
 	        Utilisateur userRecuperer = utilisateurOptional.get();
 	        userRecuperer.setNom(nom);
 	        userRecuperer.setPrenom(prenom);
+	        userRecuperer.setUsername(username);
 	        Utilisateur updatedUser = utilisateurRepository.save(userRecuperer);
 	        return ResponseEntity.ok(updatedUser);
 	    } else {
